@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useApp } from '@/context/AppContext';
 import { useTranslation } from '@/lib/translations';
 import Header from '@/components/Header';
@@ -10,12 +11,14 @@ export default function SettingsPage() {
     language, setLanguage, 
     contacts, removeContact, addContact, 
     dndStart, setDndStart, 
-    dndEnd, setDndEnd 
+    dndEnd, setDndEnd,
+    logout
   } = useApp();
   const t = useTranslation(language);
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState('');
   const [newPhone, setNewPhone] = useState('');
+  const router = useRouter();
 
   const handleAdd = () => {
     if (newName.trim() && newPhone.trim()) {
@@ -24,6 +27,11 @@ export default function SettingsPage() {
       setNewPhone('');
       setShowAdd(false);
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.replace('/');
   };
 
   return (
@@ -98,6 +106,13 @@ export default function SettingsPage() {
 
           <button className="btn btn-outline-dashed btn-full" onClick={() => setShowAdd(true)} style={{ marginTop: '8px' }}>
             + {t.add_new_contact}
+          </button>
+        </div>
+
+        {/* Logout Section */}
+        <div className="settings-section" style={{ marginTop: '32px', borderTop: '1px solid var(--glass-border)', paddingTop: '24px' }}>
+          <button className="btn btn-danger btn-full" onClick={handleLogout}>
+            <span>🚪</span> {t.logout}
           </button>
         </div>
       </div>

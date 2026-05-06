@@ -16,6 +16,8 @@ export function AppProvider({ children }) {
   const [language, setLanguage] = useState('en');
   const [contacts, setContacts] = useState(DEFAULT_CONTACTS);
   const [onboarded, setOnboarded] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [userStatus, setUserStatus] = useState('safe');
   const [lastPing, setLastPing] = useState(null);
   const [dndStart, setDndStart] = useState('22:00');
@@ -29,6 +31,8 @@ export function AppProvider({ children }) {
         if (parsed.language) setLanguage(parsed.language);
         if (parsed.contacts) setContacts(parsed.contacts);
         if (parsed.onboarded) setOnboarded(parsed.onboarded);
+        if (parsed.isAuthenticated) setIsAuthenticated(parsed.isAuthenticated);
+        if (parsed.user) setUser(parsed.user);
         if (parsed.lastPing) setLastPing(parsed.lastPing);
         if (parsed.dndStart) setDndStart(parsed.dndStart);
         if (parsed.dndEnd) setDndEnd(parsed.dndEnd);
@@ -38,9 +42,9 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('subok-state', JSON.stringify({
-      language, contacts, onboarded, lastPing, dndStart, dndEnd
+      language, contacts, onboarded, isAuthenticated, user, lastPing, dndStart, dndEnd
     }));
-  }, [language, contacts, onboarded, lastPing, dndStart, dndEnd]);
+  }, [language, contacts, onboarded, isAuthenticated, user, lastPing, dndStart, dndEnd]);
 
   const [toasts, setToasts] = useState([]);
 
@@ -70,11 +74,40 @@ export function AppProvider({ children }) {
     showToast('Contact removed.', 'info');
   };
 
+  const logout = () => {
+    localStorage.removeItem('subok-state');
+    setOnboarded(false);
+    setIsAuthenticated(false);
+    setContacts(DEFAULT_CONTACTS);
+    setLanguage('en');
+    // The redirect will happen automatically in the root page or when the state updates
+  };
+
+  const login = (identifier, password) => {
+    // Simulated login
+    setIsAuthenticated(true);
+    // For simulation, we'll set a default name if not found, 
+    // but usually this would come from the database
+    if (!user) {
+      setUser({ name: 'User' });
+    }
+    showToast('Signed in successfully!', 'success');
+  };
+
+  const register = (userData) => {
+    // Simulated registration
+    setUser({ name: userData.name, email: userData.email, phoneNumber: userData.phoneNumber });
+    showToast('Account created successfully!', 'success');
+  };
+
   return (
     <AppContext.Provider value={{
       language, setLanguage,
       contacts, setContacts, addContact, removeContact,
       onboarded, setOnboarded,
+      isAuthenticated, setIsAuthenticated,
+      user, setUser,
+      login, register, logout,
       userStatus, setUserStatus,
       lastPing, ping,
       dndStart, setDndStart,

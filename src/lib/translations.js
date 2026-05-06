@@ -45,9 +45,10 @@ export const translations = {
     alert_test: "Test alert triggered. Contacts notified.",
     last_seen: "Last seen",
     just_now: "Just now",
+    logout: "Logout",
   },
   hi: {
-    app_name: "सुबक",
+    app_name: "सबओके",
     home: "होम",
     family: "परिवार",
     settings: "सेटिंग्स",
@@ -92,6 +93,7 @@ export const translations = {
     alert_test: "टेस्ट अलर्ट शुरू हो गया। संपर्कों को सूचित कर दिया गया है।",
     last_seen: "पिछली बार देखा गया",
     just_now: "अभी-अभी",
+    logout: "लॉगआउट",
   }
 };
 

@@ -1,4 +1,4 @@
-# Subok (सुबक) - Safety First
+# Subok (सबओके) - Safety First
 
 Subok is a safety-ping and family circle application built with Next.js. It allows users to stay connected with their family and trusted contacts, providing real-time status updates and emergency location sharing.
 
@@ -8,7 +8,7 @@ Subok is a safety-ping and family circle application built with Next.js. It allo
 - **Family Circle**: Keep track of your family members' status and last seen times.
 - **Trusted Contacts**: Manage a list of contacts who will be notified if you're inactive.
 - **Location Sharing**: Share your current location with your trusted contacts instantly.
-- **Multi-language Support**: Fully localized in English and Hindi (सुबक).
+- **Multi-language Support**: Fully localized in English and Hindi (सबओके).
 - **Do Not Disturb (DND)**: Schedule quiet hours to pause alerts during sleep.
 - **Onboarding Flow**: Easy setup for language preferences and emergency contacts.
 

@@ -7,7 +7,7 @@ import BottomNav from '@/components/BottomNav';
 import LocationModal from '@/components/LocationModal';
 
 export default function HomePage() {
-  const { userStatus, lastPing, ping, language, showToast } = useApp();
+  const { userStatus, lastPing, ping, language, showToast, user } = useApp();
   const t = useTranslation(language);
   const [countdown, setCountdown] = useState(480); // 8 minutes in seconds
   const [isLocationOpen, setIsLocationOpen] = useState(false);
@@ -54,6 +54,15 @@ export default function HomePage() {
     <div className="app-shell">
       <div className="page-container">
         <Header title={t.app_name} />
+
+        <div style={{ marginBottom: '20px', padding: '0 4px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-primary)' }}>
+            Hi {user?.name || 'User'},
+          </h2>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '4px' }}>
+            {t.status_summary || "Everything looks good today."}
+          </p>
+        </div>
 
         <div className="glass-card status-bar">
           <div className="status-bar-left">

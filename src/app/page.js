@@ -5,15 +5,17 @@ import { useApp } from '@/context/AppContext';
 
 export default function RootPage() {
   const router = useRouter();
-  const { onboarded } = useApp();
+  const { onboarded, isAuthenticated } = useApp();
 
   useEffect(() => {
-    if (onboarded) {
+    if (!isAuthenticated) {
+      router.replace('/login');
+    } else if (onboarded) {
       router.replace('/home');
     } else {
       router.replace('/onboarding');
     }
-  }, [onboarded, router]);
+  }, [isAuthenticated, onboarded, router]);
 
   return null;
 }
